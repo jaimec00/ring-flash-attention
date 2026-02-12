@@ -1,0 +1,17 @@
+[project]
+name = "ring-flash-attention"
+version = "0.1.8"
+description = "Ring attention implementation with flash attention"
+channels = ["conda-forge", "pytorch"]
+platforms = ["linux-64"]
+
+[tasks]
+test = "torchrun --nproc_per_node=2 test/test.sh"
+
+[dependencies]
+python = ">=3.10"
+pip = "*"
+gh = "*"
+
+[pypi-dependencies]
+ring-flash-attn = { path = ".", editable = true }
