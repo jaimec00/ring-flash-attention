@@ -2,16 +2,26 @@
 name = "ring-flash-attention"
 version = "0.1.8"
 description = "Ring attention implementation with flash attention"
-channels = ["conda-forge", "pytorch"]
+channels = ["conda-forge", "pytorch", "nvidia"]
 platforms = ["linux-64"]
 
 [tasks]
 test = "torchrun --nproc_per_node=2 test/test.sh"
 
 [dependencies]
-python = ">=3.10"
+python = ">=3.12,<3.13"
 pip = "*"
 gh = "*"
+numpy = "*"
+cuda-version = ">=12.8,<12.9"
+cuda-compiler = ">=12.8,<12.9"
 
 [pypi-dependencies]
 ring-flash-attn = { path = ".", editable = true }
+torch = { version = ">=2.8.0,<2.9.0", index = "https://download.pytorch.org/whl/cu128" }
+flash-attn = { url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiFALSE-cp312-cp312-linux_x86_64.whl" }
+triton = { version = ">=3.4.0,<3.5.0", index = "https://download.pytorch.org/whl/cu128" }
+transformers = "*"
+
+[pypi-options]
+no-build-isolation = true
